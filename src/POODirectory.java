@@ -5,6 +5,7 @@ public class POODirectory extends base_file{
 	private static final int MAX_Item = 1024;
 	private int item_count;
 	private base_file[] files;
+	private POODirectory upper_level;
 	
 	public POODirectory(String name)
 	{
@@ -12,6 +13,7 @@ public class POODirectory extends base_file{
 		this.name = name;
 		item_count = 0;
 		files = new base_file[MAX_Item];
+		upper_level = null;
 	}
 	
 	public int add(POOBoard board)
@@ -21,6 +23,7 @@ public class POODirectory extends base_file{
 		else
 		{
 			files[item_count] = board;
+			((POOBoard)files[item_count]).set_upper(this);
 			item_count ++;
 			return 1;
 		}
@@ -33,6 +36,7 @@ public class POODirectory extends base_file{
 		else
 		{
 			files[item_count] = dir;
+			((POODirectory)files[item_count]).set_upper(this);
 			item_count ++;
 			return 1;
 		}
@@ -92,5 +96,33 @@ public class POODirectory extends base_file{
 	public String get_name()
 	{
 		return name;
+	}
+	
+	public base_file goto_next_level(String name)
+	{
+		base_file current = null;
+		for(int i=0; i<item_count; i++)
+		{
+			current = files[i];
+			if(current.get_name().equals("--------------------"))
+			{
+				current = null;
+				break;
+			}
+			if(current.get_name().equals(name))
+				break;
+			current = null;
+		}
+		return current;
+	}
+	
+	public void set_upper(POODirectory upper)
+	{
+		upper_level = upper;
+	}
+	
+	public POODirectory go_up()
+	{
+		return upper_level;
 	}
 }

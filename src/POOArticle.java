@@ -10,6 +10,7 @@ public class POOArticle extends base_file{
 	private static final int MAXEVAL = 100;
 	private String[] evaluation_message;
 	private int total_evaluation;
+	private POOBoard upper_level;
 	
 	public POOArticle(String title, String author, String content)
 	{
@@ -91,5 +92,20 @@ public class POOArticle extends base_file{
 	public String get_name()
 	{
 		return title;
+	}
+	
+	public void set_upper(POOBoard upper)
+	{
+		upper_level = upper;
+	}
+	
+	public POOBoard go_up()
+	{
+		return upper_level;
+	}
+	
+	public int get_id()
+	{
+		return id;
 	}
 }
