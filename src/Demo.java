@@ -2,12 +2,15 @@
 import java.util.Scanner;
 
 public class Demo {
+	
+	public static base_file current;
+	public static final POODirectory root = new POODirectory("root");
+	
 	public static void main(String argv[])
 	{
-		POODirectory root = new POODirectory("root");
 		Scanner input = new Scanner(System.in);
 		String command;
-		base_file current = root;
+		current = root;
 		boolean leave;
 		
 		System.out.println("you are in root directory");
@@ -16,14 +19,14 @@ public class Demo {
 		while(true)
 		{
 			command = input.nextLine();
-			String[] split_command = command.split(" ");
-			leave = execute(split_command, current);
+			String[] split_command = command.split("[ ]+");
+			leave = execute(split_command);
 			if(leave == false)
 				break;
 		}
 		input.close();
 	}
-	public static boolean execute(String[] split_command, base_file current)
+	public static boolean execute(String[] split_command)
 	{
 		base_file next;
 		int id;
@@ -41,12 +44,12 @@ public class Demo {
 					((POOArticle) current).show();
 				break;
 			case "goto":	// goto directory_name/board_name/article_id : go to directory/board/article
-
 				if(current instanceof POODirectory)
 				{
 					next = ((POODirectory) current).goto_next_level(split_command[1]);
 					if(next != null)
 						current = next;
+					current.show_name();
 				}
 				else if(current instanceof POOBoard)
 				{
@@ -71,6 +74,12 @@ public class Demo {
 				else if(current instanceof POOBoard)
 				{
 					next = ((POOBoard) current).go_up();
+					if(next != null)
+						current = next;
+				}
+				else if(current instanceof POOArticle)
+				{
+					next = ((POOArticle) current).go_up();
 					if(next != null)
 						current = next;
 				}
