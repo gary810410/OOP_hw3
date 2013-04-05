@@ -21,7 +21,7 @@ public class Demo {
 		{"arrow","arrow message:\n\tarrow the article"},
 		{"exit","exit:\n\texit this program"},
 		{"help","help:\n\thelp you"}
-	};	//total:14
+	};
 	
 	
 	public static void main(String argv[])
@@ -191,8 +191,11 @@ public class Demo {
 						System.out.println(directions[i][1]);
 				else
 					for(int i=0; i<directions.length;i++)
-						if(directions[i][0].equals(split_command[1]))
+					{	
+						String regx = ".*"+split_command[1]+".*";
+						if(directions[i][0].matches(regx))
 							System.out.println(directions[i][1]);
+					}
 				break;
 			default:
 				;
