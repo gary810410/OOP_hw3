@@ -1,5 +1,6 @@
 
 import java.util.Scanner;
+import java.io.*;
 
 public class Demo {
 	
@@ -33,7 +34,30 @@ public class Demo {
 		
 		System.out.println("you are in root directory");
 		System.out.println("type some command or use help to get more information");
-		
+		if(argv.length >= 1)
+		{
+			File file = new File(argv[0]);
+			try
+			{
+				BufferedReader reader = new BufferedReader(new FileReader(file));
+				String text = null;
+
+				// repeat until all lines is read
+				while ((text = reader.readLine()) != null)
+				{
+					String[] split_command = text.split("[ ]+");
+					leave = execute(split_command);
+					if(leave == false)
+					{
+						reader.close();
+						return;
+					}
+				}
+				reader.close();
+	        }catch(IOException e){
+	        	;
+	        }
+		}
 		while(true)
 		{
 			command = input.nextLine();
