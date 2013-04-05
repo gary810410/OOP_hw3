@@ -5,7 +5,6 @@ public class POOBoard extends base_file{
 	private static final int MAX_Article = 1024;
 	private POOArticle[] articles;
 	private int article_count;
-	private POODirectory upper_level;
 	
 	public POOBoard(String name)
 	{
@@ -58,16 +57,6 @@ public class POOBoard extends base_file{
 	public String get_name()
 	{
 		return name;
-	}
-	
-	public void set_upper(POODirectory upper)
-	{
-		upper_level = upper;
-	}
-	
-	public POODirectory go_up()
-	{
-		return upper_level;
 	}
 	
 	public POOArticle goto_next_level(int id)

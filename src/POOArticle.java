@@ -10,7 +10,7 @@ public class POOArticle extends base_file{
 	private static final int MAXEVAL = 100;
 	private String[] evaluation_message;
 	private int total_evaluation;
-	private POOBoard upper_level;
+
 	
 	public POOArticle(String title, String author, String content)
 	{
@@ -25,15 +25,15 @@ public class POOArticle extends base_file{
 		total_evaluation = 0;
 	}
 	
-	public void add_message(int push_boo_arraw, String mesg)
+	public void add_message(int push_boo_arrow, String mesg)
 	{
-		// push_boo_arraw: 1:push; -1:boo; 0:arraw
-		switch(push_boo_arraw)
+		// push_boo_arrow: 1:push; -1:boo; 0:arrow
+		switch(push_boo_arrow)
 		{
 			case 1:
 			case -1:
 			case 0:
-				evaluation_count += push_boo_arraw;
+				evaluation_count += push_boo_arrow;
 				break;
 			default:
 				return;
@@ -64,7 +64,7 @@ public class POOArticle extends base_file{
 			return 0;
 	}
 	
-	public int arraw(String mesg)
+	public int arrow(String mesg)
 	{
 		if(total_evaluation <= MAXEVAL)
 		{
@@ -94,15 +94,7 @@ public class POOArticle extends base_file{
 		return title;
 	}
 	
-	public void set_upper(POOBoard upper)
-	{
-		upper_level = upper;
-	}
 	
-	public POOBoard go_up()
-	{
-		return upper_level;
-	}
 	
 	public int get_id()
 	{
