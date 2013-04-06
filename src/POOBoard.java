@@ -17,6 +17,7 @@ public class POOBoard extends base_file{
 	public void add(POOArticle article)
 	{
 		articles[article_count] = article;
+		articles[article_count].set_upper(this);
 		article_count ++;
 	}
 	
@@ -50,14 +51,13 @@ public class POOBoard extends base_file{
 	public void show()
 	{
 		for(int i=0; i<article_count; i++)
-			articles[i].show_name();
+			articles[i].list();
 	}
 	
 	public String get_name()
 	{
 		return name;
 	}
-<<<<<<< HEAD
 	
 	public POOArticle goto_next_level(int id)
 	{
@@ -88,6 +88,4 @@ public class POOBoard extends base_file{
 				articles[i].show();
 		}
 	}
-=======
->>>>>>> parent of 11bb5ff... add some function to deal with demo.java
 }

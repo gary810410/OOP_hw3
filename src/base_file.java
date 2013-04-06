@@ -1,20 +1,14 @@
 
 public class base_file {
 	private String name;
-<<<<<<< HEAD
 	private int length;
 	private base_file upper_level;
-=======
->>>>>>> parent of 757c72d... add some function
 	
 	public base_file(String name)
 	{
 		this.name = name;
-<<<<<<< HEAD
 		length = 0;
 		upper_level = null;
-=======
->>>>>>> parent of 757c72d... add some function
 	}
 	public base_file()
 	{
@@ -34,7 +28,6 @@ public class base_file {
 	{
 		System.out.println(name);
 	}
-<<<<<<< HEAD
 	
 	public String get_name()
 	{
@@ -55,6 +48,4 @@ public class base_file {
 	{
 		return upper_level;
 	}
-=======
->>>>>>> parent of 757c72d... add some function
 }

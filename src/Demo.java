@@ -45,8 +45,7 @@ public class Demo {
 				// repeat until all lines is read
 				while ((text = reader.readLine()) != null)
 				{
-					String[] split_command = text.split("[ ]+");
-					leave = execute(split_command);
+					leave = execute(text);
 					if(leave == false)
 					{
 						reader.close();
@@ -61,17 +60,19 @@ public class Demo {
 		while(true)
 		{
 			command = input.nextLine();
-			String[] split_command = command.split("[ ]+");
-			leave = execute(split_command);
+			
+			leave = execute(command);
 			if(leave == false)
 				break;
 		}
 		input.close();
 	}
-	public static boolean execute(String[] split_command)
+	public static boolean execute(String command)
 	{
 		base_file next;
 		int id;
+		String[] split_command = command.split("[ ]+");
+		
 		switch(split_command[0])
 		{
 			case "where":	// where: show the current location
@@ -214,12 +215,15 @@ public class Demo {
 					for(int i=0; i<directions.length;i++)
 						System.out.println(directions[i][1]);
 				else
+				{
+					String[] splitted = command.split("[ ]+", 2);
 					for(int i=0; i<directions.length;i++)
 					{	
-						String regx = ".*"+split_command[1]+".*";
+						String regx = ".*"+splitted[1]+".*";
 						if(directions[i][0].matches(regx))
 							System.out.println(directions[i][1]);
 					}
+				}
 				break;
 			default:
 				;
