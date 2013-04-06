@@ -21,7 +21,6 @@ public class POODirectory extends base_file{
 		else
 		{
 			files[item_count] = board;
-			((POOBoard)files[item_count]).set_upper(this);
 			item_count ++;
 			return 1;
 		}
@@ -34,7 +33,6 @@ public class POODirectory extends base_file{
 		else
 		{
 			files[item_count] = dir;
-			((POODirectory)files[item_count]).set_upper(this);
 			item_count ++;
 			return 1;
 		}
@@ -95,6 +93,7 @@ public class POODirectory extends base_file{
 	{
 		return name;
 	}
+<<<<<<< HEAD
 	
 	public base_file goto_next_level(String name)
 	{
@@ -115,4 +114,6 @@ public class POODirectory extends base_file{
 	}
 	
 
+=======
+>>>>>>> parent of 11bb5ff... add some function to deal with demo.java
 }

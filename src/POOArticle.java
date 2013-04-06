@@ -10,7 +10,10 @@ public class POOArticle extends base_file{
 	private static final int MAXEVAL = 100;
 	private String[] evaluation_message;
 	private int total_evaluation;
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 11bb5ff... add some function to deal with demo.java
 	
 	public POOArticle(String title, String author, String content)
 	{
@@ -93,6 +96,7 @@ public class POOArticle extends base_file{
 	{
 		return title;
 	}
+<<<<<<< HEAD
 	
 	
 	
@@ -100,4 +104,6 @@ public class POOArticle extends base_file{
 	{
 		return id;
 	}
+=======
+>>>>>>> parent of 11bb5ff... add some function to deal with demo.java
 }
