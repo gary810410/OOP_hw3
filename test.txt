@@ -1,0 +1,39 @@
+adddir eat
+adddir education
+addboard nothing
+addboard talk
+addboard birthday
+addboard Taipei
+goto eat
+addboard fruit
+addboard breakfast
+addboard bread
+goto fruit
+addarticle2 apple gary1 appleisgood
+addarticle2 banana gary2 bananaisgood
+goto 0
+push I think so.
+boo
+boo
+boo
+up
+goto 1
+boo a
+arrow test for arrow
+up
+up
+goto breakfast
+addarticle2 milk gary2 nothing
+up
+up
+goto talk
+addarticle2 OOP gary OOPisgood
+goto 3
+push
+push
+push
+push
+push
+push
+up
+up
