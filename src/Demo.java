@@ -4,6 +4,7 @@ import java.io.*;
 
 public class Demo {
 	
+	public static String user_name;
 	public static base_file current;
 	public static final POODirectory root = new POODirectory("root");
 	public static final String[][] directions =
@@ -16,7 +17,8 @@ public class Demo {
 		{"detail","detail id_number:\n\tshow the detail information of the article"},
 		{"addboard","addboard board_name:\n\tadd a new board to current directory"},
 		{"adddir","adddir diry_name:\n\tadd a new directory to current directory"},
-		{"addarticle","addarticle title author content:\n\tadd a new article to current board"},
+		{"addarticle","addarticle title content:\n\tadd a new article to current board"},
+		{"addarticle2","addarticle2 title author content:\n\tadd a new article to current board"},
 		{"push","push message:\n\tpush the article"},
 		{"boo","boo message:\n\tboo the article"},
 		{"arrow","arrow message:\n\tarrow the article"},
@@ -32,10 +34,12 @@ public class Demo {
 		current = root;
 		boolean leave;
 		
-		System.out.println("you are in root directory");
-		System.out.println("type some command or use help to get more information");
+		
+		
 		if(argv.length >= 1)
 		{
+			System.out.println("loading file to initialize......");
+			
 			File file = new File(argv[0]);
 			try
 			{
@@ -45,6 +49,7 @@ public class Demo {
 				// repeat until all lines is read
 				while ((text = reader.readLine()) != null)
 				{
+					//System.out.print("command:"+text+"\n");
 					leave = execute(text);
 					if(leave == false)
 					{
@@ -57,11 +62,20 @@ public class Demo {
 	        	;
 	        }
 		}
+		System.out.print("enter your name to login:");
+		user_name = input.nextLine();
+		System.out.println("you are in root directory");
+		execute("list");
+		System.out.println("type some command or use help to get more information");
 		while(true)
 		{
+			System.out.print("command:");
 			command = input.nextLine();
-			
 			leave = execute(command);
+			if(command.matches("up.*")|| command.matches("goto.*"))
+				execute("where");
+			if(command.matches("where.*") || command.matches("up.*")|| command.matches("goto.*") || command.matches("add.*"))
+				execute("list");
 			if(leave == false)
 				break;
 		}
@@ -81,13 +95,14 @@ public class Demo {
 				System.out.println("");
 				break;
 			case "list":	// list: show the items in the current directory/board
-				System.out.println(current.get_name()+" has:");
+				System.out.println(current.get_name()+" has:\n---------------");
 				if(current instanceof POODirectory)
 					((POODirectory) current).show();
 				else if(current instanceof POOBoard)
 					((POOBoard) current).show();
 				else if(current instanceof POOArticle)
 					((POOArticle) current).show();
+				System.out.println("--------------");
 				break;
 			case "goto":	// goto directory_name/board_name/article_id: go to directory/board/article
 				if(split_command.length <=1)
@@ -110,9 +125,6 @@ public class Demo {
 					if(next != null)
 						current = next;
 				}
-				System.out.print("you are at:");
-				current.where();
-				System.out.println("");
 				break;
 			case "up":		// up: go to the upper directory
 				if(current instanceof POODirectory)
@@ -133,9 +145,6 @@ public class Demo {
 					if(next != null)
 						current = next;
 				}
-				System.out.print("you are at:");
-				current.where();
-				System.out.println("");
 				break;
 			case "check":	// check article_name: list the articles in the board with the same name
 				if(split_command.length <=1)
@@ -177,36 +186,65 @@ public class Demo {
 					 ((POODirectory) current).add(new_dir);
 				}
 				break;
-			case "addarticle":	// addarticle title author content: add a new article to current board
-				if(split_command.length <=4)
+			case "addarticle":	// addarticle title content: add a new article to current board
+				if(split_command.length <3)
 					break;
-				String title = split_command[1];
-				String author = split_command[2];
-				String content = split_command[3];
-				POOArticle new_article;
-				if(current instanceof POOBoard)
+				else
 				{
-					new_article = new POOArticle(title, author, content); 
-					((POOBoard) current).add(new_article);
+					String [] splitted = command.split("[ ]+", 3);
+					String title = splitted[1];
+					String content = splitted[2];
+					POOArticle new_article;
+					if(current instanceof POOBoard)
+					{
+						new_article = new POOArticle(title, user_name, content); 
+						((POOBoard) current).add(new_article);
+					}
+				}
+				break;
+			case "addarticle2":	// addarticle2 title author content: add a new article to current board
+				if(split_command.length <4)
+					break;
+				else
+				{
+					String [] splitted = command.split("[ ]+", 4);
+					String title = splitted[1];
+					String author = splitted[2];
+					String content = splitted[3];
+					POOArticle new_article;
+					if(current instanceof POOBoard)
+					{
+						new_article = new POOArticle(title, author, content); 
+						((POOBoard) current).add(new_article);
+					}
 				}
 				break;
 			case "push":	// push message: push the article
-				if(split_command.length <=1)
-					break;
-				if(current instanceof POOArticle)
-					 ((POOArticle) current).push(split_command[1]);
+				if(split_command.length ==1 && current instanceof POOArticle)
+					((POOArticle) current).push("");
+				else if(current instanceof POOArticle)
+				{
+					String[] splitted = command.split("[ ]+", 2); 
+					((POOArticle) current).push(splitted[1]);
+				}
 				break;
 			case "boo":		// boo message: boo the article
-				if(split_command.length <=1)
-					break;
-				if(current instanceof POOArticle)
-					 ((POOArticle) current).boo(split_command[1]);
+				if(split_command.length ==1 && current instanceof POOArticle)
+					((POOArticle) current).boo("");
+				else if(current instanceof POOArticle)
+				{
+					String[] splitted = command.split("[ ]+", 2); 
+					((POOArticle) current).boo(splitted[1]);
+				}
 				break;
 			case "arrow":	// arrow message: arrow the article
-				if(split_command.length <=1)
-					break;
-				if(current instanceof POOArticle)
-					 ((POOArticle) current).arrow(split_command[1]);
+				if(split_command.length ==1 && current instanceof POOArticle)
+					((POOArticle) current).arrow("");
+				else if(current instanceof POOArticle)
+				{
+					String[] splitted = command.split("[ ]+", 2); 
+					((POOArticle) current).arrow(splitted[1]);
+				}
 				break;
 			case "exit":	// exit: exit
 				return false;
