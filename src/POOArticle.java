@@ -28,17 +28,23 @@ public class POOArticle extends base_file{
 	public void add_message(int push_boo_arrow, String mesg)
 	{
 		// push_boo_arrow: 1:push; -1:boo; 0:arrow
+		String evaluation_mesg;
 		switch(push_boo_arrow)
 		{
 			case 1:
+				evaluation_mesg = "push : "+mesg;
+				break;
 			case -1:
+				evaluation_mesg = "boo  : "+mesg;
+				break;
 			case 0:
-				evaluation_count += push_boo_arrow;
+				evaluation_mesg = "arrow: "+mesg;
 				break;
 			default:
 				return;
 		}
-		evaluation_message[total_evaluation] = mesg;
+		evaluation_count += push_boo_arrow;
+		evaluation_message[total_evaluation] = evaluation_mesg;
 		total_evaluation ++;
 	}
 	
