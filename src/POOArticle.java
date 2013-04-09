@@ -14,7 +14,7 @@ public class POOArticle extends base_file{
 	
 	public POOArticle(String title, String author, String content)
 	{
-		super(title);
+		super("\""+title+"\"");
 		id = total_id;
 		total_id = (total_id+1)%1000;
 		this.title = title;
@@ -83,16 +83,16 @@ public class POOArticle extends base_file{
 	
 	public void show()
 	{
-		System.out.println("id: "+id+" title: "+title+" author: "+author);
-		System.out.println("content: "+content);
-		System.out.println("message#: "+total_evaluation+" evaluation: "+evaluation_count);
+		System.out.println("id: "+id+"\ttitle: "+title+"\tauthor: "+author);
+		System.out.println("content:\n\t"+content);
+		System.out.println("message#: "+total_evaluation+"\tevaluation: "+evaluation_count);
 		for(int i=0; i<total_evaluation; i++)
 			System.out.println(evaluation_message[i]);
 	}
 	
 	public void list()
 	{
-		System.out.println("evaluation: "+evaluation_count+" id: "+id+" title: "+title+" author: "+author);
+		System.out.println(id+"\t"+evaluation_count+"\t\t"+author+"\t"+title);
 	}
 	
 	public String get_name()

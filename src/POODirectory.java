@@ -8,7 +8,7 @@ public class POODirectory extends base_file{
 	
 	public POODirectory(String name)
 	{
-		super(name);
+		super("["+name+"]");
 		this.name = name;
 		item_count = 0;
 		files = new base_file[MAX_Item];
@@ -109,7 +109,6 @@ public class POODirectory extends base_file{
 			}
 			if(current.get_name().equals(name))
 				break;
-			current = null;
 		}
 		return current;
 	}

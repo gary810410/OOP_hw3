@@ -8,7 +8,7 @@ public class POOBoard extends base_file{
 	
 	public POOBoard(String name)
 	{
-		super(name);
+		super("<"+name+">");
 		this.name = name;
 		articles = new POOArticle[MAX_Article];
 		article_count = 0;
@@ -50,6 +50,7 @@ public class POOBoard extends base_file{
 	
 	public void show()
 	{
+		System.out.println("id\tevaluation\tauthor\ttitle");
 		for(int i=0; i<article_count; i++)
 			articles[i].list();
 	}
